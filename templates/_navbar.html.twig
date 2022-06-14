@@ -6,9 +6,11 @@
         <a href="#">Logo</a>
     </div>
     <nav class="w-full flex justify-between items-center lg:w-auto lg:flex-grow lg:justify-end">
-        <div>
-            <a href="{{ path('app_login') }}">Login</a>
-            <a href="{{ path('app_register') }}">Register</a>
-        </div>
+        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            <div>
+                <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+        
     </nav>
 </header>
