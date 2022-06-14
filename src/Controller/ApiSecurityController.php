@@ -29,20 +29,26 @@ class ApiSecurityController extends AbstractController
     }
 
     /**
-     * @Route("/api/logout", name="api_logout", methods={"GET"})
+     * @Route("/api/me", name="api_me", methods={"GET"})
+     * 
      */
-    public function logout(): JsonResponse
+    public function me(): JsonResponse
     {
-        if (!$this->getUser()) {
+        $user = $this->getUser();
+
+        if (!$user) {
             return $this->json([
-                'error' => 'Invalid logout request.'
+                'error' => 'User not connected.'
             ], 400);
         }
 
         return $this->json([
-            'msg' => 'logout success'
+            'user' => [
+                'id' => $user->getId(),
+                'email' => $user->getEmail(),
+                'roles' => $user->getRoles(),
+            ],
+            'msg' => 'user connected'
         ]);
     }
-
-
 }
