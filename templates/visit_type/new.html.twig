@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New VisitType{% endblock %}
+
+{% block body %}
+    <h1>Create new VisitType</h1>
+
+    {{ include('visit_type/_form.html.twig') }}
+
+    <a href="{{ path('app_visit_type_index') }}">back to list</a>
+{% endblock %}

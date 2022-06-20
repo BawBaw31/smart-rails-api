@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Measure{% endblock %}
+
+{% block body %}
+    <h1>Measure</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ measure.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ measure.label }}</td>
+            </tr>
+            <tr>
+                <th>Theoretical_value</th>
+                <td>{{ measure.theoreticalValue }}</td>
+            </tr>
+            <tr>
+                <th>Min_value</th>
+                <td>{{ measure.minValue }}</td>
+            </tr>
+            <tr>
+                <th>Max_value</th>
+                <td>{{ measure.maxValue }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_measure_index') }}">back to list</a>
+
+    <a href="{{ path('app_measure_edit', {'id': measure.id}) }}">edit</a>
+
+    {{ include('measure/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,3 +1,7 @@
+i {
+    width: 2rem;
+}
+
 .side-bar {
     width: 6rem;
     transition: width 0.5s;
