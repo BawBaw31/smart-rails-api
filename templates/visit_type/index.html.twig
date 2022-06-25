@@ -15,14 +15,14 @@
             </tr>
         </thead>
         <tbody>
-        {% for visit_type in visit_types %}
+        {% for visitType in visitTypes %}
             <tr>
-                <td class="p-5 border">{{ visit_type.id }}</td>
-                <td class="p-5 border">{{ visit_type.label }}</td>
+                <td class="p-5 border">{{ visitType.id }}</td>
+                <td class="p-5 border">{{ visitType.label }}</td>
                 <td class="p-5 border flex flex-col">
-                    <a href="{{ path('app_visit_type_show', {'id': visit_type.id}) }}" 
+                    <a href="{{ path('app_visit_type_show', {'id': visitType.id}) }}" 
                     class="px-5 py-2 mb-2 w-full text-center bg-gray-300 rounded-md shadow-xl hover:bg-gray-400">show</a>
-                    <a href="{{ path('app_visit_type_edit', {'id': visit_type.id}) }}"
+                    <a href="{{ path('app_visit_type_edit', {'id': visitType.id}) }}"
                     class="px-5 py-2 w-full text-center bg-blue-300 rounded-md shadow-xl hover:bg-blue-400">edit</a>
                 </td>
             </tr>

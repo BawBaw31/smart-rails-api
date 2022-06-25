@@ -25,12 +25,7 @@ class VisitType
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=Visit::class, mappedBy="visit_type")
-     */
-    private $visits;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Measure::class, mappedBy="visit_type")
+     * @ORM\ManyToMany(targetEntity=Measure::class, mappedBy="visitType")
      */
     private $measures;
 
@@ -38,6 +33,7 @@ class VisitType
     {
         $this->visits = new ArrayCollection();
         $this->measures = new ArrayCollection();
+        $this->visit_reports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,28 +59,6 @@ class VisitType
     public function getVisits(): Collection
     {
         return $this->visits;
-    }
-
-    public function addVisit(Visit $visit): self
-    {
-        if (!$this->visits->contains($visit)) {
-            $this->visits[] = $visit;
-            $visit->setVisitType($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVisit(Visit $visit): self
-    {
-        if ($this->visits->removeElement($visit)) {
-            // set the owning side to null (unless already changed)
-            if ($visit->getVisitType() === $this) {
-                $visit->setVisitType(null);
-            }
-        }
-
-        return $this;
     }
 
     /**
@@ -114,7 +88,16 @@ class VisitType
         return $this;
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->label;
+    }
+
+    /**
+     * @return Collection<int, VisitReport>
+     */
+    public function getVisit_reports(): Collection
+    {
+        return $this->visit_reports;
     }
 }

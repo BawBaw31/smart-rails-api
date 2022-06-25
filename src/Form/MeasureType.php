@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Measure;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,10 +13,9 @@ class MeasureType extends AbstractType
     {
         $builder
             ->add('label')
-            ->add('theoretical_value')
-            ->add('min_value')
-            ->add('max_value')
-        ;
+            ->add('theoreticalValue')
+            ->add('minValue')
+            ->add('maxValue');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

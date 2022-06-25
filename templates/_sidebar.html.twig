@@ -10,7 +10,7 @@
             </a>
         </div>
         {% if is_granted("ROLE_ADMIN") %}
-            {% if is_granted("ROLE_SPER_ADMIN") %}
+            {% if is_granted("ROLE_SUPER_ADMIN") %}
                 <div class="mb-5 h-16 flex items-center justify-center rounded-lg hover:bg-gray-400 hover:shadow">
                     <a href="/user" class="w-full h-full">
                         <div class="w-full h-full px-5 flex items-center justify-start overflow-hidden">

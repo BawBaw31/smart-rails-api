@@ -23,7 +23,7 @@ class VisitTypeController extends AbstractController
     public function index(VisitTypeRepository $visitTypeRepository): Response
     {
         return $this->render('visit_type/index.html.twig', [
-            'visit_types' => $visitTypeRepository->findAll(),
+            'visitTypes' => $visitTypeRepository->findAll(),
         ]);
     }
 
@@ -39,11 +39,11 @@ class VisitTypeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $visitTypeRepository->add($visitType, true);
 
-            return $this->redirectToRoute('app_visit_type_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_visitType_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('visit_type/new.html.twig', [
-            'visit_type' => $visitType,
+            'visitType' => $visitType,
             'form' => $form,
         ]);
     }
@@ -54,7 +54,7 @@ class VisitTypeController extends AbstractController
     public function show(VisitType $visitType): Response
     {
         return $this->render('visit_type/show.html.twig', [
-            'visit_type' => $visitType,
+            'visitType' => $visitType,
         ]);
     }
 
@@ -69,11 +69,11 @@ class VisitTypeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $visitTypeRepository->add($visitType, true);
 
-            return $this->redirectToRoute('app_visit_type_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_visitType_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('visit_type/edit.html.twig', [
-            'visit_type' => $visitType,
+            'visitType' => $visitType,
             'form' => $form,
         ]);
     }
@@ -83,7 +83,7 @@ class VisitTypeController extends AbstractController
      */
     public function delete(Request $request, VisitType $visitType, VisitTypeRepository $visitTypeRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$visitType->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $visitType->getId(), $request->request->get('_token'))) {
             $visitTypeRepository->remove($visitType, true);
         }
 

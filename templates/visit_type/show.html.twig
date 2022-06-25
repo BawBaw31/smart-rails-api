@@ -10,16 +10,16 @@
             <tbody>
                 <tr>
                     <th class="p-5 border">Id</th>
-                    <td class="p-5 border">{{ visit_type.id }}</td>
+                    <td class="p-5 border">{{ visitType.id }}</td>
                 </tr>
                 <tr>
                     <th class="p-5 border">Label</th>
-                    <td class="p-5 border">{{ visit_type.label }}</td>
+                    <td class="p-5 border">{{ visitType.label }}</td>
                 </tr>
             </tbody>
         </table>
     <div>
-        <a href="{{ path('app_visit_type_edit', {'id': visit_type.id}) }}"
+        <a href="{{ path('app_visit_type_edit', {'id': visitType.id}) }}"
         class="px-5 py-2 bg-blue-300 rounded-md shadow-xl hover:bg-blue-400 w-max">edit</a>
         <a href="{{ path('app_visit_type_index') }}"
         class="ml-5 text-blue-600">back to list</a>

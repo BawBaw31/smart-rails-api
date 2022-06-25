@@ -27,22 +27,22 @@ class Measure
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $theoretical_value;
+    private $theoricalValue;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $min_value;
+    private $minValue;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $max_value;
+    private $maxValue;
 
     /**
      * @ORM\ManyToMany(targetEntity=VisitType::class, inversedBy="measures")
      */
-    private $visit_type;
+    private $visitType;
 
     /**
      * @ORM\OneToMany(targetEntity=VisitValue::class, mappedBy="measure")
@@ -51,7 +51,7 @@ class Measure
 
     public function __construct()
     {
-        $this->visit_type = new ArrayCollection();
+        $this->visitType = new ArrayCollection();
         $this->visitValues = new ArrayCollection();
     }
 
@@ -74,36 +74,36 @@ class Measure
 
     public function getTheoreticalValue(): ?float
     {
-        return $this->theoretical_value;
+        return $this->theoricalValue;
     }
 
-    public function setTheoreticalValue(?float $theoretical_value): self
+    public function setTheoreticalValue(?float $theoricalValue): self
     {
-        $this->theoretical_value = $theoretical_value;
+        $this->theoricalValue = $theoricalValue;
 
         return $this;
     }
 
     public function getMinValue(): ?float
     {
-        return $this->min_value;
+        return $this->minValue;
     }
 
-    public function setMinValue(?float $min_value): self
+    public function setMinValue(?float $minValue): self
     {
-        $this->min_value = $min_value;
+        $this->minValue = $minValue;
 
         return $this;
     }
 
     public function getMaxValue(): ?float
     {
-        return $this->max_value;
+        return $this->maxValue;
     }
 
-    public function setMaxValue(?float $max_value): self
+    public function setMaxValue(?float $maxValue): self
     {
-        $this->max_value = $max_value;
+        $this->maxValue = $maxValue;
 
         return $this;
     }
@@ -113,13 +113,13 @@ class Measure
      */
     public function getVisitType(): Collection
     {
-        return $this->visit_type;
+        return $this->visitType;
     }
 
     public function addVisitType(VisitType $visitType): self
     {
-        if (!$this->visit_type->contains($visitType)) {
-            $this->visit_type[] = $visitType;
+        if (!$this->visitType->contains($visitType)) {
+            $this->visitType[] = $visitType;
         }
 
         return $this;
@@ -127,7 +127,7 @@ class Measure
 
     public function removeVisitType(VisitType $visitType): self
     {
-        $this->visit_type->removeElement($visitType);
+        $this->visitType->removeElement($visitType);
 
         return $this;
     }
@@ -162,7 +162,8 @@ class Measure
         return $this;
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->label;
     }
 }

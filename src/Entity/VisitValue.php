@@ -23,12 +23,6 @@ class VisitValue
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Visit::class, inversedBy="visitValues")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $visit;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Measure::class, inversedBy="visitValues")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -47,18 +41,6 @@ class VisitValue
     public function setValue(float $value): self
     {
         $this->value = $value;
-
-        return $this;
-    }
-
-    public function getVisit(): ?Visit
-    {
-        return $this->visit;
-    }
-
-    public function setVisit(?Visit $visit): self
-    {
-        $this->visit = $visit;
 
         return $this;
     }
