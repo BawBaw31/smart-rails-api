@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form '_forms.html.twig' %}
+
 {% block title %}New Measure{% endblock %}
 
 {% block body %}
-    <h1>Create new Measure</h1>
+    <div class="py-5 px-10 w-full flex-col">
+        <h1 class="mb-20 text-4xl">Create new Measure</h1>
 
-    {{ include('measure/_form.html.twig') }}
+        {{ include('measure/_form.html.twig') }}
 
-    <a href="{{ path('app_measure_index') }}">back to list</a>
+    </div>
 {% endblock %}

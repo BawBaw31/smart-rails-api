@@ -9,15 +9,17 @@
                 </div>
             </a>
         </div>
-        {% if is_granted("ROLE_SUPER_ADMIN") %}
-            <div class="mb-5 h-16 flex items-center justify-center rounded-lg hover:bg-gray-400 hover:shadow">
-                <a href="/user" class="w-full h-full">
-                    <div class="w-full h-full px-5 flex items-center justify-start overflow-hidden">
-                        <i class="fa-solid fa-users fa-2xl"></i>
-                        <p class="ml-6 text-xl hover:font-bold">Users</p>
-                    </div>
-                </a>
-            </div>
+        {% if is_granted("ROLE_ADMIN") %}
+            {% if is_granted("ROLE_SPER_ADMIN") %}
+                <div class="mb-5 h-16 flex items-center justify-center rounded-lg hover:bg-gray-400 hover:shadow">
+                    <a href="/user" class="w-full h-full">
+                        <div class="w-full h-full px-5 flex items-center justify-start overflow-hidden">
+                            <i class="fa-solid fa-users fa-2xl"></i>
+                            <p class="ml-6 text-xl hover:font-bold">Users</p>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
             <div class="mb-5 h-16 flex items-center justify-center rounded-lg hover:bg-gray-400 hover:shadow">
                 <a href="/measure" class="w-full h-full">
                     <div class="w-full h-full px-5 flex items-center justify-start overflow-hidden">

@@ -3,32 +3,32 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <div class="py-5 px-10 w-full flex flex-col">
+        <h1 class="mb-20 text-4xl">User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="mb-5 table border-separate border border-slate-500">
+            <tbody>
+                <tr>
+                    <th class="p-5 border">Id</th>
+                    <td class="p-5 border">{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">Email</th>
+                    <td class="p-5 border">{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">Roles</th>
+                    <td class="p-5 border">{{ user.roles ? user.roles|json_encode : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <a href="{{ path('app_user_edit', {'id': user.id}) }}" 
+            class="px-5 py-2 bg-blue-300 rounded-md shadow-xl hover:bg-blue-400 w-max">edit</a>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+            <a href="{{ path('app_user_index') }}" class="ml-5 text-blue-600">back to list</a>
+        </div>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+        {{ include('user/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

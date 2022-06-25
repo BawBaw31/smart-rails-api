@@ -3,39 +3,44 @@
 {% block title %}Measure index{% endblock %}
 
 {% block body %}
-    <h1>Measure index</h1>
+    <div class="py-5 px-10 w-full flex flex-col">
+        <h1 class="mb-20 text-4xl">Measure index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>Theoretical_value</th>
-                <th>Min_value</th>
-                <th>Max_value</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for measure in measures %}
-            <tr>
-                <td>{{ measure.id }}</td>
-                <td>{{ measure.label }}</td>
-                <td>{{ measure.theoreticalValue }}</td>
-                <td>{{ measure.minValue }}</td>
-                <td>{{ measure.maxValue }}</td>
-                <td>
-                    <a href="{{ path('app_measure_show', {'id': measure.id}) }}">show</a>
-                    <a href="{{ path('app_measure_edit', {'id': measure.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="mb-5 table border-separate border border-slate-500">
+            <thead>
+                <tr>
+                    <th class="p-5 border">Id</th>
+                    <th class="p-5 border">Label</th>
+                    <th class="p-5 border">Theoretical_value</th>
+                    <th class="p-5 border">Min_value</th>
+                    <th class="p-5 border">Max_value</th>
+                    <th class="p-5 border">actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for measure in measures %}
+                <tr>
+                    <td class="p-5 border">{{ measure.id }}</td>
+                    <td class="p-5 border">{{ measure.label }}</td>
+                    <td class="p-5 border">{{ measure.theoreticalValue }}</td>
+                    <td class="p-5 border">{{ measure.minValue }}</td>
+                    <td class="p-5 border">{{ measure.maxValue }}</td>
+                    <td class="p-5 border flex flex-col">
+                        <a href="{{ path('app_measure_show', {'id': measure.id}) }}" 
+                        class="px-5 py-2 mb-2 w-full text-center bg-gray-300 rounded-md shadow-xl hover:bg-gray-400">show</a>
+                        <a href="{{ path('app_measure_edit', {'id': measure.id}) }}"
+                        class="px-5 py-2 w-full text-center bg-blue-300 rounded-md shadow-xl hover:bg-blue-400">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_measure_new') }}">Create new</a>
+        <a href="{{ path('app_measure_new') }}"
+        class="px-5 py-2 bg-green-300 rounded-md shadow-xl hover:bg-green-400 w-max">Create new</a>
+    </div>
 {% endblock %}

@@ -3,24 +3,27 @@
 {% block title %}VisitType index{% endblock %}
 
 {% block body %}
-    <h1>VisitType index</h1>
+    <div class="py-5 px-10 w-full flex flex-col">
+        <h1 class="mb-20 text-4xl">VisitType index</h1>
 
-    <table class="table">
+    <table class="mb-5 table border-separate border border-slate-500">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>actions</th>
+                <th class="p-5 border">Id</th>
+                <th class="p-5 border">Label</th>
+                <th class="p-5 border">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for visit_type in visit_types %}
             <tr>
-                <td>{{ visit_type.id }}</td>
-                <td>{{ visit_type.label }}</td>
-                <td>
-                    <a href="{{ path('app_visit_type_show', {'id': visit_type.id}) }}">show</a>
-                    <a href="{{ path('app_visit_type_edit', {'id': visit_type.id}) }}">edit</a>
+                <td class="p-5 border">{{ visit_type.id }}</td>
+                <td class="p-5 border">{{ visit_type.label }}</td>
+                <td class="p-5 border flex flex-col">
+                    <a href="{{ path('app_visit_type_show', {'id': visit_type.id}) }}" 
+                    class="px-5 py-2 mb-2 w-full text-center bg-gray-300 rounded-md shadow-xl hover:bg-gray-400">show</a>
+                    <a href="{{ path('app_visit_type_edit', {'id': visit_type.id}) }}"
+                    class="px-5 py-2 w-full text-center bg-blue-300 rounded-md shadow-xl hover:bg-blue-400">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +34,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_visit_type_new') }}">Create new</a>
+    <a class="px-5 py-2 bg-green-300 rounded-md shadow-xl hover:bg-green-400 w-max"
+    href="{{ path('app_visit_type_new') }}">Create new</a>
 {% endblock %}

@@ -3,36 +3,40 @@
 {% block title %}Measure{% endblock %}
 
 {% block body %}
-    <h1>Measure</h1>
+     <div class="py-5 px-10 w-full flex flex-col">
+        <h1 class="mb-20 text-4xl">Measure</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ measure.id }}</td>
-            </tr>
-            <tr>
-                <th>Label</th>
-                <td>{{ measure.label }}</td>
-            </tr>
-            <tr>
-                <th>Theoretical_value</th>
-                <td>{{ measure.theoreticalValue }}</td>
-            </tr>
-            <tr>
-                <th>Min_value</th>
-                <td>{{ measure.minValue }}</td>
-            </tr>
-            <tr>
-                <th>Max_value</th>
-                <td>{{ measure.maxValue }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="mb-5 table border-separate border border-slate-500">
+            <tbody>
+                <tr>
+                    <th class="p-5 border">Id</th>
+                    <td class="p-5 border">{{ measure.id }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">Label</th>
+                    <td class="p-5 border">{{ measure.label }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">Theoretical_value</th>
+                    <td class="p-5 border">{{ measure.theoreticalValue }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">Min_value</th>
+                    <td class="p-5 border">{{ measure.minValue }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">Max_value</th>
+                    <td class="p-5 border">{{ measure.maxValue }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <a href="{{ path('app_measure_edit', {'id': measure.id}) }}"
+            class="px-5 py-2 bg-blue-300 rounded-md shadow-xl hover:bg-blue-400 w-max">edit</a>
+            <a href="{{ path('app_measure_index') }}"
+            class="ml-5 text-blue-600">back to list</a>
+        </div>
 
-    <a href="{{ path('app_measure_index') }}">back to list</a>
-
-    <a href="{{ path('app_measure_edit', {'id': measure.id}) }}">edit</a>
-
-    {{ include('measure/_delete_form.html.twig') }}
+        {{ include('measure/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

@@ -5,11 +5,9 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <div class="py-5 px-10 w-full lg:w-2/5 m-auto">
+    <div class="py-5 px-10 w-full flex-col">
         <h1 class="mb-20 text-4xl">Create new User</h1>
 
         {{ include('user/_form.html.twig') }}
-
-        <a href="{{ path('app_user_index') }}">back to list</a>
     </div>
 {% endblock %}
