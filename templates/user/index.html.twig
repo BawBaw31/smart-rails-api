@@ -20,7 +20,13 @@
                 <tr>
                     <td class="p-5 border">{{ user.id }}</td>
                     <td class="p-5 border">{{ user.email }}</td>
-                    <td class="p-5 border">{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td class="p-5 border">
+                        <ul>
+                            {% for role in user.roles %}
+                                <li>{{role}}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
                     <td class="p-5 border flex flex-col">
                         <a href="{{ path('app_user_show', {'id': user.id}) }}" 
                         class="px-5 py-2 mb-2 w-full text-center bg-gray-300 rounded-md shadow-xl hover:bg-gray-400">show</a>

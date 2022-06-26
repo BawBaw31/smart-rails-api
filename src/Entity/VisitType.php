@@ -29,11 +29,15 @@ class VisitType
      */
     private $measures;
 
+    /**
+     * @ORM\OneToMany(targetEntity=VisitReport::class, mappedBy="visitType")
+     */
+    private $visitReports;
+
     public function __construct()
     {
-        $this->visits = new ArrayCollection();
         $this->measures = new ArrayCollection();
-        $this->visit_reports = new ArrayCollection();
+        $this->visitReports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,14 +55,6 @@ class VisitType
         $this->label = $label;
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Visit>
-     */
-    public function getVisits(): Collection
-    {
-        return $this->visits;
     }
 
     /**
@@ -96,8 +92,30 @@ class VisitType
     /**
      * @return Collection<int, VisitReport>
      */
-    public function getVisit_reports(): Collection
+    public function getVisitReports(): Collection
     {
-        return $this->visit_reports;
+        return $this->visitReports;
+    }
+
+    public function addVisitReport(VisitReport $visitReport): self
+    {
+        if (!$this->visitReports->contains($visitReport)) {
+            $this->visitReports[] = $visitReport;
+            $visitReport->setVisitType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVisitReport(VisitReport $visitReport): self
+    {
+        if ($this->visitReports->removeElement($visitReport)) {
+            // set the owning side to null (unless already changed)
+            if ($visitReport->getVisitType() === $this) {
+                $visitReport->setVisitType(null);
+            }
+        }
+
+        return $this;
     }
 }

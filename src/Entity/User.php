@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -39,6 +41,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     private $plainPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity=VisitReport::class, mappedBy="writer")
+     */
+    private $visitReports;
+
+    public function __construct()
+    {
+        $this->visitReports = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,5 +149,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, VisitReport>
+     */
+    public function getVisitReports(): Collection
+    {
+        return $this->visitReports;
+    }
+
+    public function addVisitReport(VisitReport $visitReport): self
+    {
+        if (!$this->visitReports->contains($visitReport)) {
+            $this->visitReports[] = $visitReport;
+            $visitReport->setWriter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVisitReport(VisitReport $visitReport): self
+    {
+        if ($this->visitReports->removeElement($visitReport)) {
+            // set the owning side to null (unless already changed)
+            if ($visitReport->getWriter() === $this) {
+                $visitReport->setWriter(null);
+            }
+        }
+
+        return $this;
     }
 }

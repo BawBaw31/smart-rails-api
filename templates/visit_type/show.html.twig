@@ -16,6 +16,16 @@
                     <th class="p-5 border">Label</th>
                     <td class="p-5 border">{{ visitType.label }}</td>
                 </tr>
+                <tr>
+                    <th class="p-5 border">Measures</th>
+                    <td class="p-5 border">
+                        <ul>
+                            {% for measure in visitType.measures %}
+                                <li>{{measure}}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
             </tbody>
         </table>
     <div>

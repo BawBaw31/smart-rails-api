@@ -28,6 +28,12 @@ class VisitValue
      */
     private $measure;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=VisitReport::class, inversedBy="values")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $visitReport;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +59,18 @@ class VisitValue
     public function setMeasure(?Measure $measure): self
     {
         $this->measure = $measure;
+
+        return $this;
+    }
+
+    public function getVisitReport(): ?VisitReport
+    {
+        return $this->visitReport;
+    }
+
+    public function setVisitReport(?VisitReport $visitReport): self
+    {
+        $this->visitReport = $visitReport;
 
         return $this;
     }

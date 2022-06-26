@@ -39,7 +39,7 @@ class VisitTypeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $visitTypeRepository->add($visitType, true);
 
-            return $this->redirectToRoute('app_visitType_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_visit_type_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('visit_type/new.html.twig', [
@@ -69,7 +69,7 @@ class VisitTypeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $visitTypeRepository->add($visitType, true);
 
-            return $this->redirectToRoute('app_visitType_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_visit_type_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('visit_type/edit.html.twig', [
