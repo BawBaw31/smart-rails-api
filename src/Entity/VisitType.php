@@ -6,6 +6,7 @@ use App\Repository\VisitTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VisitTypeRepository::class)
@@ -16,16 +17,19 @@ class VisitType
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"visit_types", "visit_reports"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"visit_types", "visit_reports"})
      */
     private $label;
 
     /**
      * @ORM\ManyToMany(targetEntity=Measure::class, mappedBy="visitType")
+     * @Groups({"visit_types"})
      */
     private $measures;
 

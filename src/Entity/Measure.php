@@ -6,6 +6,7 @@ use App\Repository\MeasureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=MeasureRepository::class)
@@ -16,26 +17,36 @@ class Measure
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"visit_types"})
+     * @Groups({"visit_reports"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"visit_types"})
+     * @Groups({"visit_reports"})
      */
     private $label;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"visit_types"})
+     * @Groups({"visit_reports"})
      */
-    private $theoricalValue;
+    private $theoreticalValue;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"visit_types"})
+     * @Groups({"visit_reports"})
      */
     private $minValue;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"visit_types"})
+     * @Groups({"visit_reports"})
      */
     private $maxValue;
 
@@ -74,12 +85,12 @@ class Measure
 
     public function getTheoreticalValue(): ?float
     {
-        return $this->theoricalValue;
+        return $this->theoreticalValue;
     }
 
-    public function setTheoreticalValue(?float $theoricalValue): self
+    public function setTheoreticalValue(?float $theoreticalValue): self
     {
-        $this->theoricalValue = $theoricalValue;
+        $this->theoreticalValue = $theoreticalValue;
 
         return $this;
     }

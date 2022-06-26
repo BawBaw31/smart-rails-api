@@ -6,6 +6,7 @@ use App\Repository\VisitReportRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VisitReportRepository::class)
@@ -16,23 +17,27 @@ class VisitReport
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"visit_reports"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=VisitType::class, inversedBy="visitReports")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"visit_reports"})
      */
     private $visitType;
 
     /**
      * @ORM\OneToMany(targetEntity=VisitValue::class, mappedBy="visitReport", orphanRemoval=true)
+     * @Groups({"visit_reports"})
      */
     private $values;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="visitReports")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"visit_reports"})
      */
     private $writer;
 

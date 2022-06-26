@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VisitValueRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VisitValueRepository::class)
@@ -14,17 +15,20 @@ class VisitValue
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"visit_reports"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"visit_reports"})
      */
     private $value;
 
     /**
      * @ORM\ManyToOne(targetEntity=Measure::class, inversedBy="visitValues")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"visit_reports"})
      */
     private $measure;
 
@@ -33,6 +37,12 @@ class VisitValue
      * @ORM\JoinColumn(nullable=false)
      */
     private $visitReport;
+
+    // public function __construct(float $value, Measure $measure)
+    // {
+    //     $this->value = $value;
+    //     $this->measure = $measure;
+    // }
 
     public function getId(): ?int
     {
