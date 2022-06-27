@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VisitReport index{% endblock %}
+
+{% block body %}
+    <div class="py-5 px-10 w-full flex flex-col">
+        <h1 class="mb-20 text-4xl">VisitReport index</h1>
+
+    <table class="mb-5 table border-separate border border-slate-500">
+        <thead>
+            <tr>
+                <th class="p-5 border">Id</th>
+                <th class="p-5 border">CreatedAt</th>
+                <th class="p-5 border">VisitType</th>
+                <th class="p-5 border w-8">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for visit_report in visit_reports %}
+            <tr>
+                <td class="p-5 border">{{ visit_report.id }}</td>
+                <td class="p-5 border">{{ visit_report.createdAt|date('Y-m-d') }}</td>
+                <td class="p-5 border">{{ visit_report.visitType.label }}</td>
+                <td class="p-5 border flex flex-col">
+                    <a href="{{ path('app_visit_report_show', {'id': visit_report.id}) }}"
+                    class="px-5 py-2 mb-2 w-full text-center bg-gray-300 rounded-md shadow-xl hover:bg-gray-400">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

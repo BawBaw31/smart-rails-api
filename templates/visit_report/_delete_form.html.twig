@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_visit_report_delete', {'id': visit_report.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ visit_report.id) }}">
+    <button class="px-5 py-2 bg-red-300 rounded-md shadow-xl hover:bg-red-400">Delete</button>
+    <a href="{{ path('app_visit_report_index') }}"
+    class="ml-5 text-blue-600">back to list</a>
+</form>

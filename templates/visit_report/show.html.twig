@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VisitReport{% endblock %}
+
+{% block body %}
+    <div class="py-5 px-10 w-full flex flex-col">
+        <h1 class="mb-20 text-4xl">VisitReport</h1>
+
+        <table class="mb-5 table border-separate border border-slate-500">
+            <tbody>
+                <tr>
+                    <th class="p-5 border">Id</th>
+                    <td class="p-5 border">{{ visit_report.id }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">CreatedAt</th>
+                    <td class="p-5 border">{{ visit_report.createdAt|date('Y-m-d') }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">VisitType</th>
+                    <td class="p-5 border">{{ visit_report.visitType.label }}</td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">Values</th>
+                    <td class="p-5 border">
+                        <table class="mb-5 w-full table">
+                            <thead>
+                                <tr>
+                                    <th class="p-5 border">Measure</th>
+                                    <th class="p-5 border">Value</th>
+                                    <th class="p-5 border">TheroreticalValue</th>
+                                    <th class="p-5 border">Tolerance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for value in visit_report.values %}
+                                <tr>
+                                    <td class="p-5 border">{{ value.measure.label }}</td>
+                                    {% if value.value < value.measure.theoreticalValue - value.measure.minValue or 
+                                    value.value > value.measure.theoreticalValue + value.measure.maxValue %}
+                                        <td class="p-5 border bg-red-200">{{ value.value }}</td>
+                                    {% else %}
+                                        <td class="p-5 border">{{ value.value }}</td>                                        
+                                    {% endif %}
+                                    <td class="p-5 border">{{ value.measure.theoreticalValue }}</td>
+                                    <td class="p-5 border">-{{ value.measure.minValue }} +{{value.measure.maxValue}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="p-5 border">Actions</th>
+                    <td class="p-5 border">
+                        <a href="{{ path('api_visit_report_download_pdf', {'id': visit_report.id }) }}" 
+                        target="_blank" class="px-5 py-2 bg-indigo-300 rounded-md shadow-xl hover:bg-indigo-400">
+                            Download PDF Report
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {{ include('visit_report/_delete_form.html.twig') }}
+
+    </div>
+{% endblock %}

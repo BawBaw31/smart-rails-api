@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form '_forms.html.twig' %}
+
+{% block title %}Edit VisitReport{% endblock %}
+
+{% block body %}
+    <div class="py-5 px-10 w-full flex flex-col">
+        <h1 class="mb-20 text-4xl">Edit Report</h1>
+
+        {{ include('visit_report/_form.html.twig', {'button_label': 'Update'}) }}
+
+        {{ include('visit_report/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

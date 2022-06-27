@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ report.visitType.label }}</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css" integrity="sha512-5D0ofs3AsWoKsspH9kCWlY7qGxnHvdN/Yz2rTNwD9L271Mno85s+5ERo03qk9SUNtdgOZ4A9t8kRDexkvnWByA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <h1>{{ report.visitType.label }}</h1>
+        <h2>{{ report.createdAt|date('Y-m-d') }}</h2>
+        <table>
+            <tr>
+                <th>Cotes</th>
+                <th>Voie Directe</th>
+                <th>Valeur théorique</th>
+                <th>Tolérences (mm)</th>
+            </tr>
+            {% for value in report.values %}
+                <tr>
+                    <td class="p-5 border">{{ value.measure.label }}</td>
+                    {% if value.value < value.measure.theoreticalValue - value.measure.minValue or 
+                    value.value > value.measure.theoreticalValue + value.measure.maxValue %}
+                        <td class="p-5 border bg-red-200">{{ value.value }}</td>
+                    {% else %}
+                        <td class="p-5 border">{{ value.value }}</td>                                        
+                    {% endif %}
+                    <td class="p-5 border">{{ value.measure.theoreticalValue }}</td>
+                    <td class="p-5 border">-{{ value.measure.minValue }} +{{ value.measure.maxValue }}</td>
+                </tr>
+            {% endfor %}
+        </table> 
+    </body>
+</html>

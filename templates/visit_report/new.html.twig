@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New VisitReport{% endblock %}
+
+{% block body %}
+    <div class="py-5 px-10 w-full flex flex-col">
+        <h1 class="mb-20 text-4xl">Create new VisitReport</h1>
+
+        {{ include('visit_report/_form.html.twig') }}
+    </div>
+{% endblock %}
