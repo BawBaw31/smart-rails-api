@@ -21,7 +21,10 @@
                     <td class="p-5 border">
                         <ul>
                             {% for measure in visitType.measures %}
-                                <li>{{measure}}</li>
+                                <li>
+                                    <a href="{{ path('app_measure_show', { id: measure.id }) }}"
+                                    class="text-blue-600">- {{ measure }}</a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </td>

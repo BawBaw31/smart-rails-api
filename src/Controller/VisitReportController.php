@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\VisitReport;
 use App\Form\VisitReportType;
 use App\Repository\VisitReportRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,11 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/visit/report")
+ * @IsGranted("ROLE_USER")
  */
 class VisitReportController extends AbstractController
 {
     /**
      * @Route("/", name="app_visit_report_index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(VisitReportRepository $visitReportRepository): Response
     {
@@ -51,9 +54,17 @@ class VisitReportController extends AbstractController
      */
     public function show(VisitReport $visitReport): Response
     {
-        return $this->render('visit_report/show.html.twig', [
-            'visit_report' => $visitReport,
-        ]);
+        if (
+            in_array("ROLE_ADMIN", $this->getUser()->getRoles()) ||
+            $visitReport->getWriter() == $this->getUser()
+        ) {
+            return $this->render('visit_report/show.html.twig', [
+                'visit_report' => $visitReport,
+            ]);
+        } else {
+            $this->addFlash('error', 'Vous n\'avez pas les droits pour voir ce rapport de visite');
+            return $this->redirectToRoute('app_visit_report_index');
+        }
     }
 
     /**
@@ -78,10 +89,11 @@ class VisitReportController extends AbstractController
 
     /**
      * @Route("/{id}", name="app_visit_report_delete", methods={"POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, VisitReport $visitReport, VisitReportRepository $visitReportRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$visitReport->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $visitReport->getId(), $request->request->get('_token'))) {
             $visitReportRepository->remove($visitReport, true);
         }
 

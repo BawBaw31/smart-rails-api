@@ -1,14 +1,17 @@
 {# Navbar #}
 
-<header class="p-10 z-10 w-full fixed top-0 flex shadow-inner bg-gray-200">
+<header class="px-10 py-6 z-10 w-full fixed top-0 flex shadow bg-gray-200">
     <div class="hidden lg:block">
-        {# <a href="{{ path('home') }}">Logo</a> #}
-        <a href="#">Logo</a>
+        <a href="{{ path('home') }}">
+            <img width="50" height="50" src="/images/smart_rails_logo_prev_ui.png" />
+        </a>
     </div>
     <nav class="w-full flex justify-between items-center lg:w-auto lg:flex-grow lg:justify-end">
         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
             <div>
-                <a href="{{ path('app_logout') }}">Logout</a>
+                <a href="{{ path('app_logout') }}" class="p-5 rounded-lg hover:shadow hover:bg-gray-400">
+                    <i class="fas fa-sign-out-alt fa-2xl"></i>
+                </a>
             </div>
         {% endif %}
         

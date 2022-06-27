@@ -5,8 +5,9 @@ namespace App\Entity;
 use App\Repository\VisitReportRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=VisitReportRepository::class)
@@ -31,6 +32,10 @@ class VisitReport
     /**
      * @ORM\OneToMany(targetEntity=VisitValue::class, mappedBy="visitReport", orphanRemoval=true)
      * @Groups({"visit_reports"})
+     * @Assert\Count(
+     *  min= "1", 
+     *  minMessage = "You must specify at least one value"
+     * )
      */
     private $values;
 
@@ -43,6 +48,7 @@ class VisitReport
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"visit_reports"})
      */
     private $createdAt;
 

@@ -65,13 +65,41 @@ class ApiVisitReportController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="api_visit_report_get_one", methods={"GET"})
+     */
+    public function show(
+        VisitReport $visitReport,
+        SerializerInterface $serializer
+    ): Response {
+        $json = $serializer->serialize($visitReport, 'json', [
+            'groups' => ['visit_reports']
+        ]);
+
+        return new Response($json);
+    }
+
+    /**
+     * @Route("/get/my", name="api_visit_report_get_my", methods={"GET"})
+     */
+    public function mine(
+        VisitReportRepository $visitReportRepository,
+        SerializerInterface $serializer
+    ): Response {
+        $myReports = $visitReportRepository->findBy(['writer' => $this->getUser()], ['createdAt' => 'DESC']);
+        $json = $serializer->serialize($myReports, 'json', [
+            'groups' => ['visit_reports']
+        ]);
+
+        return new Response($json);
+    }
+
+    /**
      * @Route("/{id}/download", name="api_visit_report_download_pdf", methods={"GET"})
      */
     public function downloadPdf(
         Environment $twig,
         VisitReport $visitReport
     ): Response {
-        // instantiate and use the dompdf class
         $dompdf = new Dompdf();
         $pdfName = "visit_report_" . $visitReport->getId();
         $html = $twig->render('pdf/visit_report_pdf.html.twig', [

@@ -17,8 +17,26 @@
                     <td class="p-5 border">{{ visit_report.createdAt|date('Y-m-d') }}</td>
                 </tr>
                 <tr>
+                    <th class="p-5 border">Writer</th>
+                    <td class="p-5 border">
+                        {% if is_granted("ROLE_SUPER_ADMIN") %}
+                            <a href="{{ path('app_user_show', { id: visit_report.writer.id }) }}"
+                            class="text-blue-600">{{ visit_report.writer.email }}</a>
+                        {% else %}
+                            {{ visit_report.writer.email }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
                     <th class="p-5 border">VisitType</th>
-                    <td class="p-5 border">{{ visit_report.visitType.label }}</td>
+                    <td class="p-5 border">
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ path('app_visit_type_show', { id: visit_report.visitType.id }) }}"
+                            class="text-blue-600">{{ visit_report.visitType.label }}</a>
+                        {% else %}
+                            {{ visit_report.visitType.label }}
+                        {% endif %}
+                    </td>
                 </tr>
                 <tr>
                     <th class="p-5 border">Values</th>
@@ -61,7 +79,12 @@
                 </tr>
             </tbody>
         </table>
-        {{ include('visit_report/_delete_form.html.twig') }}
+        {% if is_granted("ROLE_ADMIN") %}
+            {{ include('visit_report/_delete_form.html.twig') }}
+        {% else %}
+            <a href="{{ path('home') }}"
+            class="ml-5 text-blue-600">back to list</a>
+        {% endif %}
 
     </div>
 {% endblock %}

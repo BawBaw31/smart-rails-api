@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\VisitReportRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,33 +17,36 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(VisitReportRepository $visitReportRepository): Response
     {
-        return $this->render('pages/home.html.twig');
+        $myReports = $visitReportRepository->findBy(['writer' => $this->getUser()]);
+        return $this->render('visit_report/index.html.twig', [
+            'visit_reports' => $myReports,
+        ]);
     }
 
     /**
      * @Route("/csv", name="about", methods={"GET"})
      */
-    public function csv(SerializerInterface $serializer): Response
-    {
-        $csvFile = $serializer->serialize(
-            [
-                ['name' => 'John', 'age' => '30'],
-                ['name' => 'Jane', 'age' => '25'],
-            ],
-            'csv'
-        );
+    // public function csv(SerializerInterface $serializer): Response
+    // {
+    //     $csvFile = $serializer->serialize(
+    //         [
+    //             ['name' => 'John', 'age' => '30'],
+    //             ['name' => 'Jane', 'age' => '25'],
+    //         ],
+    //         'csv'
+    //     );
 
-        return new Response(
-            $csvFile,
-            200,
-            [
-                //Définit le contenu de la requête en tant que fichier Excel
-                'Content-Type' => 'application/vnd.ms-excel',
-                //On indique que le fichier sera en attachment donc ouverture de boite de téléchargement ainsi que le nom du fichier
-                "Content-disposition" => "attachment; filename=TestCsv.csv"
-            ]
-        );
-    }
+    //     return new Response(
+    //         $csvFile,
+    //         200,
+    //         [
+    //             //Définit le contenu de la requête en tant que fichier Excel
+    //             'Content-Type' => 'application/vnd.ms-excel',
+    //             //On indique que le fichier sera en attachment donc ouverture de boite de téléchargement ainsi que le nom du fichier
+    //             "Content-disposition" => "attachment; filename=TestCsv.csv"
+    //         ]
+    //     );
+    // }
 }
